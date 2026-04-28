@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Memory Word Game</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./home.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <li>
+            Memory Word Game
+        </li>
+        <li>
+            User
+        </li>
+    </nav>
+    <!--the side bar for game categories-->
+    <div class="sideBar">
+        <a href="home.html">Home</a>
+        <a href="Instructions.html">Instructions</a>
+        <a href="score.html">Score</a>
+        <a href="about.html">About</a>
+    </div>
+    <!--the content-->
+    <section>
+        <!--the game cards modal-->
+        <p style="text-align: center;">Welcome</p>
+        <div class="cardContainer">
+            <button class="startButton" id="startBtn">Start Game</button>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p> &copy; Copy Right 2026</p>
+    </footer>
+
+    <script>
+        document.getElementById("startBtn").addEventListener('click', startGame);
+
+
+        function startGame() {
+            //reset the game state once user clicks start
+            sessionStorage.setItem("score", 0);
+            sessionStorage.setItem("round", 1);
+            sessionStorage.removeItem("words");
+
+            //get game session from the database
+
+            fetch("./api/startWordGame.php")
+                .then(res => {
+                    if (!res.ok) {
+                        throw new Error("HTTP error " + res.status);
+                    }
+
+                    return res.json();
+                })
+                .then(data => {
+                    if (data.error) {
+                        throw new Error(data.error); //get actual name error, helps when incase of any failure
+                    }
+
+                    sessionStorage.setItem("game_id", data.game_id);
+                    window.location.href = "game.html";
+                })
+                .catch(err => {
+                    console.error("REAL ERROR:", err);
+                });
+
+        }
+    </script>
+</body>
+
+</html>

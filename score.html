@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./home.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <li>
+            Memory Word Game
+        </li>
+        <li>
+            User
+        </li>
+    </nav>
+    <!--the side bar for game categories-->
+    <div class="sideBar">
+        <a href="home.html">Home</a>
+        <a href="Instructions.html">Instructions</a>
+        <a href="score.html">Score</a>
+        <a href="about.html">About</a>
+    </div>
+    <!--the content-->
+    <section>
+        <h3 style="text-align: center;">Your Score 📈🏅🏅 </h3>
+
+        <div id="cardModalPage" class="cardContentcontainer">
+            <div id="score"></div>
+            <a href="home.html" style="text-decoration: none; text-align: center;">Back to Game </a>
+        </div>
+
+    </section>
+
+
+    <footer class="footer">
+        <p> &copy; Copy Right 2026</p>
+    </footer>
+
+    <script>
+        const game_id = sessionStorage.getItem("game_id");
+        fetch(`./api/getScore.php?game_id=${game_id}`)
+            .then(res => res.json())
+            .then(data => {
+                document.getElementById("score").innerText ="Your Score 🏅:" + data.score;
+            });      
+    </script>
+</body>
+
+</html>

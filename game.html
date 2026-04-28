@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Memory Word Game</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./home.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <li>
+            Memory Word Game
+        </li>
+        <li>
+            User
+        </li>
+    </nav>
+    <!--the side bar for game categories-->
+    <div class="sideBar">
+        <a href="home.html">Home</a>
+        <a href="Instructions.html">Instructions</a>
+        <a href="score.html">Score</a>
+        <a href="about.html">About</a>
+    </div>
+    <!--the content-->
+    <section>
+        <!--the game cards modal-->
+        <p style="text-align: center;">Welcome</p>
+        <!--Build the timer of the to show on this game page-->
+        <!--show game level dropdown-->
+        
+        <div>
+            <div class="timerCount">Timer: 00:05</div>
+        </div>
+        
+        <div class="cardContainer cardContentcontainer">
+            <div id="gameWordsContainer"> <!--cards with words-->        
+            </div>
+
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p> &copy; Copy Right 2026</p>
+    </footer>
+
+    <script>
+        //declare the round, get session storage for round
+        let round = parseInt(sessionStorage.getItem("round")) || 1;
+        //determine the number of words to show
+        let wordCount = round;
+
+        //the timer increase based per round
+        let displayTime = 3 +(round -1) *2;
+
+        //get timer element
+        const getTimerElementCount = document.querySelector(".timerCount");
+
+        //do the count down
+        let timeLeft = displayTime;
+        const countDown= setInterval(()=>{
+            let secs = timeLeft.toString().padStart(2, "0");
+            getTimerElementCount.innerHTML=`Timer: 00:${secs}`;
+
+            //decrease time
+            timeLeft--;
+
+            //check decrease of time
+            if(timeLeft < 0){
+                clearInterval(countDown);
+            }
+
+        }, 1000);
+
+        //fetch random words
+        fetch(`./api/getGameWords.php?count=${wordCount}`)
+            .then(res => res.json())
+            .then(words => {
+                //save w0rds for later validation
+                sessionStorage.setItem("words", JSON.stringify(
+                    words
+                ));
+                //get word container
+                const wordContainer = document.getElementById('gameWordsContainer');
+                wordContainer.innerHTML = ""; //clear anything that could be inside
+
+                // loop through each word card
+                words.forEach(word => {
+                    let div = document.createElement("div");
+                    div.className = "wordCard";
+                    div.innerText = word;
+                    wordContainer.appendChild(div);
+                });
+
+                //set the time off and then redirect to game input.html
+                setTimeout(() => {
+                    window.location.href= "gameInput.html";
+                    
+                }, displayTime * 1000 );
+            })
+            .catch(err => console.log("Failed to load words:", err));
+
+
+    </script>
+</body>
+
+</html>
