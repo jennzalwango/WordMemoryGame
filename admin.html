@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Memory Word Game</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./home.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <li>
+            Memory Word Game
+        </li>
+        <li>
+            User
+        </li>
+    </nav>
+    <!--the side bar for game categories-->
+    <div class="sideBar">
+        <a href="home.html">Home</a>
+        <a href="Instructions.html">Instructions</a>
+        <a href="score.html">Score</a>
+        <a href="about.html">About</a>
+        <a href="register.html">Admin Panel</a>
+
+    </div>
+    <!--the content-->
+    <section>
+        <div class="cardContainer">
+            <h3 style="text-align: center;">Admin Panel</h3>
+            <input class="newWordInputField" type="text" id="newWord" placeholder="Add New Word">
+            <button onclick="addNewWord();" class="newWordBtn">Add new Word</button>
+            <!--get word list-->
+            <div id="wordList"></div>
+            <!--the message-->
+            <p id="message"></p>
+        </div>
+
+    </section>
+
+    <footer class="footer">
+        <p> &copy; Copy Right 2026</p>
+    </footer>
+
+    <script>
+        function addNewWord() {
+            const word = document.getElementById("newWord").value;
+
+            fetch("./api/admin/addWords.php", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    word: word
+                })
+            })
+            .then(res => res.json())
+            .then(data => {
+                alert(data.message);
+                loadAllWords();
+
+            });
+        }
+        // this will load all words to show them to the frontend from backend
+        function loadAllWords() {
+            fetch("./api/admin/getAllWords.php", {
+                method: "GET"
+            })
+            .then(res => res.json())
+            .then(words => {
+                const container = document.getElementById("wordList");
+                container.innerHTML = "";
+
+                words.forEach(w => {
+                    let div = document.createElement("div");
+                    div.innerHTML = `
+                    <input type="text" value="${w.word_name}" id="word-${w.id}">
+                    <button class="editWordBtn" onclick="updateWord(${w.id})">Edit</button>
+                    <button  class="deleteWordBtn" onclick="deleteWord(${w.id})">Delete</button>
+        `;
+                    container.appendChild(div);
+                });
+            });
+        }
+
+        //function to delete words from the game
+       function deleteWord(id) {
+            fetch('./api/admin/deleteGameWords.php', {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ id: id })
+            })
+            .then(res => res.json())
+            .then(data => {
+                document.getElementById("message").innerText = data.message;
+                loadAllWords(); // ← this refreshes the word list
+            });
+        }
+
+
+        document.addEventListener("DOMContentLoaded", loadAllWords);
+
+        //function update words of the game
+        function updateWord(id) {
+            const newWord = document.getElementById(`word-${id}`).value;
+
+            //use fetch to call the php file
+            fetch("./api/admin/editGameWords.php", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    id: id,
+                    word: newWord
+                })
+            })
+            .then(res => res.json()) // the response in json
+            .then(data => {
+                document.getElementById("message").innerText = data.message;
+                loadAllWords();
+            });
+        }
+
+    </script>
+</body>
+
+</html>

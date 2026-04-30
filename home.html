@@ -25,11 +25,12 @@
         <a href="Instructions.html">Instructions</a>
         <a href="score.html">Score</a>
         <a href="about.html">About</a>
+        <a href="register.html">Admin Panel</a>
     </div>
     <!--the content-->
     <section>
         <!--the game cards modal-->
-        <p style="text-align: center;">Welcome</p>
+        <p id="welcomePara">Welcome</p>
         <div class="cardContainer">
             <button class="startButton" id="startBtn">Start Game</button>
         </div>
@@ -52,24 +53,24 @@
             //get game session from the database
 
             fetch("./api/startWordGame.php")
-                .then(res => {
-                    if (!res.ok) {
-                        throw new Error("HTTP error " + res.status);
-                    }
+            .then(res => {
+                if (!res.ok) {
+                    throw new Error("HTTP error " + res.status);
+                }
 
-                    return res.json();
-                })
-                .then(data => {
-                    if (data.error) {
-                        throw new Error(data.error); //get actual name error, helps when incase of any failure
-                    }
+                return res.json();
+            })
+            .then(data => {
+                if (data.error) {
+                    throw new Error(data.error); //get actual name error, helps when incase of any failure
+                }
 
-                    sessionStorage.setItem("game_id", data.game_id);
-                    window.location.href = "game.html";
-                })
-                .catch(err => {
-                    console.error("REAL ERROR:", err);
-                });
+                sessionStorage.setItem("game_id", data.game_id);
+                window.location.href = "game.html";
+            })
+            .catch(err => {
+                console.error("REAL ERROR:", err);
+            });
 
         }
     </script>

@@ -26,27 +26,33 @@
         <a href="Instructions.html">Instructions</a>
         <a href="score.html">Score</a>
         <a href="about.html">About</a>
+        <a href="register.html">Admin Panel</a>
     </div>
     <!--the form content-->
     <section>
-        <!--the game cards modal-->
+       
         <!--can add more content needed-->
         <div class="cardContainer cardContentcontainer">
 
-            <!--On submitting this form, you go to score paage, of php. action="/score_page.php"-->
+            <!--On submitting this form, you go to score paage, of php"-->
             <form id="wordForm">
-                <div id="inputContainer" class="answerForm"></div>
+                <div id="inputContainer"></div>
                 <button type="submit" id="submitButton">Submit</button>
             </form>
-        </div>
-        <div id="resultsScreen" style="display: none; text-align: center; margin-top: 20px;">
-            <h2 id="roundTitle"></h2>
-            <p id="resultText"></p>
+            <div id="resultsScreen" style="display: none; text-align: center; margin-top: 20px;">
+                <div id="correctWordsBox"></div> <!--use it to show the correct words-->
+                <h2 id="roundTitle"></h2>
+                <p id="resultText"></p>
+                 <!--continue button-->
 
-            <button id="continueBtn" class="continueButton">Continue</button>
-            <button id="endBtn" class="endGamebutton">End Game</button>
+                <button id="continueBtn" class="continueButton">Continue</button>
+                 <!--the end button-->
+
+                <button id="endBtn" class="endGamebutton">End Game</button>
+            </div>
 
         </div>
+
 
     </section>
 
@@ -64,14 +70,27 @@
 
 
             let userInputs = document.querySelectorAll(".wordFormInput");
+            
+
 
             //get the  count correct word the player gets right
             let correctWordCount = 0;
 
+            //normalize words to remove case senstivity
+            let normalizedWords = showedWords.map(w => w.toLowerCase());
+
+            //temporaily check the words user is submitng to aviod duplicate counts of words enterd by user
+            let usedUserWords = [];
+
+
+
             //looop each input, and increment score
             userInputs.forEach(input => {
-                if (showedWords.includes(input.value.trim())) {
+                let userWord = input.value.trim().toLowerCase(); // format the word to loer case, remove an spaces
+
+                if (normalizedWords.includes(userWord) && !usedUserWords.includes(userWord) ) {
                     correctWordCount++;
+                    usedUserWords.push(userWord);
                 }
             });
 
@@ -88,8 +107,17 @@
             // hide the form while user submitted
             document.getElementById("wordForm").style.display = "none";
 
-            //shows the players the results
-            document.getElementById("resultsScreen").style.display = "block";
+            //shows the players the results, add some animation
+            const resultsScreen = document.getElementById("resultsScreen");
+
+            resultsScreen.style.display = "block";
+
+            // trigger animation for results
+            setTimeout(() => {
+                resultsScreen.classList.add("show");
+            }, 10);
+
+            // document.getElementById("resultsScreen").style.display = "block";
 
             //set texts
 
@@ -97,8 +125,20 @@
             document.getElementById("resultText").innerText =
                 `You got ${correctWordCount} / ${showedWords.length} correct`;
 
+            //show user which words the words that were in the round
+            let correctWordsBox = document.getElementById("correctWordsBox");
 
-            //buttons
+            //build the display string, to always show the word that were played
+            let wordList = showedWords.join(", ");
+            correctWordsBox.innerHTML = `
+                <p><strong>Correct words were:</strong></p>
+                <p>${wordList}</p>
+            `;
+
+
+
+
+            //continue and edit buttons
             const continueBtn = document.getElementById("continueBtn");
             const endBtn = document.getElementById("endBtn")
 
@@ -117,7 +157,7 @@
 
             }
 
-            //end the game
+            //end the game and sshow total score
             endBtn.onclick = function () {
 
                 endGame(totalScore);
@@ -157,27 +197,27 @@
                     game_id: game_id
                 })
             })
-                .then(res => res.text()) // 👈 read raw response first
-                .then(text => {
-                    console.log("RAW RESPONSE:", text); // 👈 DEBUG
+            .then(res => res.text()) // read raw response first
+            .then(text => {
+                console.log("RAW RESPONSE:", text); // DEBUG
 
-                    if (!text) {
-                        throw new Error("Empty response from server");
-                    }
+                if (!text) {
+                    throw new Error("Empty response from server");
+                }
 
-                    let data = JSON.parse(text); // now parse safely
+                let data = JSON.parse(text); // now parse safely
 
+                console.log(data.message);
+                window.location.href = "score.html";
+            })
+            .catch(err => {
+                console.error("ERROR:", err);
+                /*.then(res => res.json())
+                .then(data => {
+                    // show and load score page
                     console.log(data.message);
-                    window.location.href = "score.html";
-                })
-                .catch(err => {
-                    console.error("ERROR:", err);
-                    /*.then(res => res.json())
-                    .then(data => {
-                        // show and load score page
-                        console.log(data.message);
-                        window.location.href = "score.html";*/
-                });
+                    window.location.href = "score.html";*/
+            });
         }
 
 

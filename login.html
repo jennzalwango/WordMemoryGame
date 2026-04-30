@@ -24,22 +24,22 @@
         <a href="Instructions.html">Instructions</a>
         <a href="score.html">Score</a>
         <a href="about.html">About</a>
+        <a href="admin.html">Admin Panel</a>
     </div>
     <!--the content-->
     <section>
-        <!--the game cards modal-->
-        <p style="text-align: center;">Welcome</p>
         <div class="cardContainer">
             <form id="form">
-                <h3>Login</h3>
+                <h3 style="text-align: center;" >Login</h3>
                 <hr>
-                <input type="email" placeholder="Email" id="email"> <br><br>
-
-                <input type="password" placeholder="Password" id="password"><br><br>
+                <input class="answerForm"  type="text" placeholder="Username" id="username"> <br><br>
+                <input  class="answerForm" type="password" placeholder="Password" id="password"><br><br>
+                <p id="message"></p>
                 <div id="lower_login">
                     <br>
+
                     <button onclick="loginUser(); return false;">Login</button>
-                    <P>Don't have an account? <a href="register.html">Signup </a></P>
+                    <P>Don't have an account? <a href="./register.html">Signup </a></P>
             </form>
 
         </div>
@@ -51,6 +51,32 @@
     </footer>
 
     <script>
+        function loginUser(){
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+
+            //use the fetch api call
+            fetch("./api/admin/login.php", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                // the body is converted in a JSON string
+                body: JSON.stringify({
+                    username:username,
+                    password: password
+                })
+            })
+            .then(res => res.json()) //the response in a json format, and the data
+            .then(data =>{
+                document.getElementById("message").innerText = data.message;
+                if(data.message === "Login successful"){
+                    //redirect the suer to the admin page
+                    window.location.href="admin.html"
+                }
+            })
+            .catch(err => console.error(err));
+        }
     </script>
 </body>
 

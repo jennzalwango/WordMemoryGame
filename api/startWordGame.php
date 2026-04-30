@@ -1,5 +1,5 @@
 <?php
-require('database_connect.php');
+require 'database_connect.php';
 header('Content-Type: application/json');
 
 $StateGameSql = "INSERT INTO GameSession (score, completed) VALUES (0, 0)";
@@ -16,4 +16,4 @@ if ($conn->query($StateGameSql) === TRUE) {
         "error" => $conn->error
     ]);
 }
-?>
+

@@ -25,24 +25,24 @@
         <a href="Instructions.html">Instructions</a>
         <a href="score.html">Score</a>
         <a href="about.html">About</a>
+        <a href="register.html">Admin Panel</a>
     </div>
     <!--the content-->
     <section>
-        <!--the game cards modal-->
-        <p style="text-align: center;">Welcome</p>
+
         <div class="cardContainer">
-            <form id="form" method="POST" action="../api/register.php">
-                <h3>Sign Up</h3>
+            <form id="signUpForm">
+                <h3 style="text-align: center;">Sign Up</h3>
                 <hr>
                 <div></div>
-                <input type="text" name="username" placeholder="Username" id="username"><br><br>
-                <input type="number" name="age" placeholder="age" id="age"><br><br>
-                <input type="password" name="Password" id="password"><br><br>
+                <input class="answerForm" type="text" name="username" placeholder="Username" id="username"><br><br>
+                <input class="answerForm" type="password" name="password" id="password" placeholder="Password"><br><br>
+                <p id="message"></p>
 
                 <div id="lower_login">
                     <br>
                     <button type="submit">Register</button>
-                    <P>You have an account? <a href="login.html">Login</a></P>
+                    <P>You have an account? <a href="./login.html">Login</a></P>
                 </div>
             </form>
         </div>
@@ -54,6 +54,41 @@
     </footer>
 
     <script>
+        // signup the user
+        document.getElementById('signUpForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+            //user fethc to register the user
+            fetch("./api/admin/register.php", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                //the body
+                body: JSON.stringify({
+                    username: username,
+                    password: password
+                })
+            })
+            .then(res => res.json())
+            .then(data => {
+                console.log("RAW RESPONSE:", data);
+                document.getElementById("message").innerText = data.message;
+                if (data.message === "Registration successful") {
+                    window.location.href = "login.html";
+                }
+            })
+            .catch(
+                err => console.error(err)
+            )
+
+
+        });
+
+
+
     </script>
 </body>
 

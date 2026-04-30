@@ -1,5 +1,5 @@
 <?php
-require('database_connect.php');
+require 'database_connect.php';
 header('Content-Type: application/json');
 //number of words to show
 $count = intval($_GET['count']);

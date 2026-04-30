@@ -1,5 +1,5 @@
 <?php
-require("database_connect.php");
+require "database_connect.php";
 
 //create user table 
 $create_user_sql = "CREATE TABLE IF NOT EXISTS Users(

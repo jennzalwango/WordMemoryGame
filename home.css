@@ -51,6 +51,13 @@ div.content {
   height: 1000px;
 }
 
+/*welecome para*/
+#welcomePara {
+  text-align: center;
+  font-weight: bold;
+  font-size: large;
+  font-style: oblique;
+}
 
 /*style middle section content */
 section {
@@ -73,9 +80,6 @@ section {
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
   max-width: 600px;
   margin: 40px auto;
-
-  border: 2px solid red;
-  /*temporaliy*/
 }
 
 .cardContentcontainer {
@@ -103,13 +107,28 @@ section {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 
   display: flex;
+  gap: 20px;
   align-items: center;
   justify-content: center;
+
+  /*animate*/
+  opacity: 0;
+  transform: scale(0.9);
+  animation: fadeIn 0.4s ease forwards;
 }
 
 /* shift every second card to the right */
 .wordCard:nth-child(even) {
-  margin-left: 200px;
+  /*margin-left: 200px;*/
+  align-self: flex-end;
+}
+
+/*animate the word cards */
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 /* style the content of the words*/
@@ -190,15 +209,30 @@ section {
   letter-spacing: 2px;
 }
 
-/*sytle the form for user submitted answers*/
-.answerForm {
+/*style the input field in form for user submit answers of the game */
+.wordFormInput {
   width: 100%;
   padding: 12px;
   margin: 8px 0;
   display: inline-block;
-  border: 1px solid rgb(217, 183, 31);
+  border: 1px solid rgb(181, 212, 214);
   border-radius: 4px;
+  box-shadow: 0 8px 25px rgba(25, 207, 164, 0.15);
+  font-weight: bold;
 }
+/*signup and login input fields*/
+.answerForm{
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid rgb(181, 212, 214);
+  border-radius: 4px;
+  box-shadow: 0 8px 25px rgba(25, 207, 164, 0.15);
+  font-weight: bold;
+
+}
+
 
 /*style submit form button*/
 #submitButton {
@@ -209,7 +243,7 @@ section {
   padding: 25px;
   margin: 40px;
 
-  background: rgb(62, 188, 81);
+  background: rgb(97, 191, 203);
   color: whitesmoke;
   border-radius: 10px;
 
@@ -221,10 +255,17 @@ section {
   font-weight: bold;
   text-align: center;
   letter-spacing: 2px;
-
+  cursor: pointer;
 }
 
-/*style the ccotinue button*/
+#submitButton:hover {
+  background-color: rgb(62, 188, 81);
+}
+
+
+
+
+/*style the continue button*/
 .continueButton {
   display: flex;
   flex-direction: column;
@@ -233,7 +274,7 @@ section {
   padding: 25px;
   margin: 40px;
 
-  background: rgb(120, 231, 155);
+  background: rgb(97, 191, 203);
   border-radius: 10px;
 
   box-shadow: 0 8px 25px rgba(138, 22, 22, 0.15);
@@ -244,10 +285,68 @@ section {
   font-weight: bold;
   text-align: center;
   letter-spacing: 2px;
-
+  cursor: pointer;
 
 }
 
+.continueButton:hover {
+  background-color: rgb(120, 231, 155);
+}
+
+/*style the edit and delete buttons*/
+
+.editWordBtn {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  padding: 25px;
+  margin: 40px;
+
+  background: rgb(97, 191, 203);
+  color: whitesmoke;
+  border-radius: 10px;
+
+  box-shadow: 0 8px 25px rgba(25, 207, 164, 0.15);
+  max-width: 250px;
+  margin: 30px auto;
+
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  letter-spacing: 2px;
+  cursor: pointer;
+}
+
+.editBtn:hover {
+  background-color: #45a049;
+}
+
+.deleteWordBtn {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  padding: 25px;
+  margin: 40px;
+
+  background: rgb(220, 120, 106);
+  border-radius: 10px;
+
+  box-shadow: 0 8px 25px rgba(138, 22, 22, 0.15);
+  max-width: 250px;
+  margin: 30px auto;
+
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  letter-spacing: 2px;
+  cursor: pointer;
+}
+
+.deleteBtn:hover {
+  background-color: #c0392b;
+}
 
 /*style the end game button*/
 .endGamebutton {
@@ -258,7 +357,7 @@ section {
   padding: 25px;
   margin: 40px;
 
-  background: rgb(234, 60, 37);
+  background: rgb(97, 191, 203);
   border-radius: 10px;
 
   box-shadow: 0 8px 25px rgba(138, 22, 22, 0.15);
@@ -269,6 +368,11 @@ section {
   font-weight: bold;
   text-align: center;
   letter-spacing: 2px;
+  cursor: pointer;
+}
+
+.endGamebutton:hover {
+  background-color: #c0392b;
 }
 
 /*style the admin forms(register and log in)*/
@@ -282,7 +386,7 @@ section {
 }
 
 #lower_login button {
-  background-color:rgb(54, 96, 97);
+  background: rgb(97, 191, 203);
   border: 2px solid;
   color: white;
   display: inline-block;
@@ -291,6 +395,44 @@ section {
   padding: 14px;
   border-radius: 4px;
   width: 120px;
+  cursor: pointer;
+}
+
+/*style admin panel, add word button*/
+.newWordBtn {
+  background: rgb(97, 191, 203);
+  border: 2px solid;
+  color: white;
+  display: inline-block;
+  font-size: 18px;
+  margin: 8px 6px;
+  padding: 14px;
+  border-radius: 4px;
+  width: 150px;
+  cursor: pointer;
+}
+
+/*style input field */
+
+.newWordInputField {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid rgb(181, 212, 214);
+  border-radius: 4px;
+}
+
+/*add some animation on results*/
+#resultsScreen {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.4s ease;
+}
+
+#resultsScreen.show {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 
