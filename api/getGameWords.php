@@ -7,6 +7,7 @@ $count = intval($_GET['count']);
 //get random words
 $getWordsSql = "SELECT word_name FROM Words ORDER BY RAND() LIMIT ?";
 
+//use prepare statement
 $getWordsStmt = $conn->prepare($getWordsSql);
 $getWordsStmt -> bind_param("i", $count);
 $getWordsStmt-> execute();

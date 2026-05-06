@@ -1,5 +1,5 @@
 <?php
-require 'auth.php';
+require 'auth.php';// authentication
 require '../database_connect.php'; // goes up one level from /api/admin/ to /api/
 
 header('Content-Type: application/json');

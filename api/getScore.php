@@ -2,8 +2,10 @@
 require 'database_connect.php';
 header('Content-Type: application/json');
 
-$game_id = $_GET['game_id'];
-$getScore = "SELECT score FROM GameSession WHERE id = ?";
+$game_id = $_GET['game_id']; //get game id
+$getScore = "SELECT score FROM GameSession WHERE id = ?"; // select from DB
+
+//use prepared statement
 $getScoreStatement = $conn->prepare($getScore);
 $getScoreStatement->bind_param("i", $game_id);
 $getScoreStatement->execute();

@@ -1,26 +1,24 @@
 <?php
-require 'auth.php';
-require '../database_connect.php'; // goes up one level from /api/admin/ to /api/
-
+require 'auth.php'; // authentication
+require '../database_connect.php'; // access db
 header('Content-Type: application/json');
 
-$data= [];
+$data = [];
 
-//get the top scorces of the game
-
+// top 5 scores
 $topScoresResults = $conn->query("SELECT score FROM GameSession ORDER BY score DESC LIMIT 5");
-$data['top_scores'] = $topScoresResults->fetch_assoc();
+$data['top_scores'] = $topScoresResults->fetch_all(MYSQLI_ASSOC);
 
-//get the avearges cores of the game
+// average score
 $averageScoreResults = $conn->query("SELECT AVG(score) as avg_score FROM GameSession");
-$data['avearge'] = $averageScoreResults->fetch_assoc();
+$data['average'] = $averageScoreResults->fetch_assoc();
 
-//total games played
+// total games played
 $totalGamesPlayed = $conn->query("SELECT COUNT(*) as total_games FROM GameSession");
 $data['total_games'] = $totalGamesPlayed->fetch_assoc();
 
-//highest scores for the game
+// highest score
 $highestScoresResults = $conn->query("SELECT MAX(score) as highest FROM GameSession");
-$data['highest_scores'] = $highestScoresResults->fetch_assoc();
+$data['highest'] = $highestScoresResults->fetch_assoc();
 
 echo json_encode($data);

@@ -1,0 +1,716 @@
+body {
+  margin: 0;
+  font-family: "Lato", sans-serif;
+  background: #dcbb86;
+}
+
+.navbar {
+  width: 100%;
+  height: 70px;
+  background-color: rgb(179, 96, 13);
+  color: rgb(11, 11, 11);
+  display: flex;
+  justify-content: space-between;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+}
+
+.navbar li {
+  padding: 17px 20px;
+  font-size: larger;
+}
+
+/*style log out button*/
+.navbar li button{
+  background: #dcbb86;
+  border-radius: 8px;
+  padding: 9px;
+}
+.navbar li button:hover{
+  background-color: #f16317;
+}
+
+/*style the aside bar*/
+.sideBar {
+  margin: 0;
+  padding: 0;
+  width: 200px;
+  height: 100vh;
+  background-color: rgb(201, 118, 35); /* rgb(244, 195, 146);*/
+  position: fixed;
+
+  overflow: auto;
+  text-decoration: none;
+}
+
+.sideBar a {
+  display: block;
+  color: rgb(11, 11, 11);
+  padding: 30px;
+  text-decoration: none;
+  font-size:larger;
+}
+
+.sideBar a:hover {
+  background-color: rgb(174, 150, 121);
+  color: white;
+}
+
+div.content {
+  margin-left: 200px;
+  padding: 1px 16px;
+  height: 1000px;
+}
+
+/*welecome para*/
+#welcomePara {
+  text-align: center;
+  font-weight: bold;
+  font-size: 25px;
+  font-style: oblique;
+  letter-spacing: 2px;
+}
+
+/*style middle section content */
+section {
+  margin-left: 200px;
+}
+
+/*style the word game cards*/
+
+.cardContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  padding: 30px;
+  margin: 40px auto;
+
+
+  background: rgb(247, 226, 200);
+  border-radius: 16px;
+
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  max-width: 600px;
+
+}
+
+.cardContentcontainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  padding: 30px;
+
+  background: rgb(247, 226, 200);
+  border-radius: 16px;
+
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  max-width: 600px;
+  margin: 40px auto;
+}
+
+/*style each individual actual word card*/
+.wordCard {
+  width: 350px;
+  height: 100px;
+  background: rgb(217, 183, 31);
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+
+  /*animate*/
+  opacity: 0;
+  transform: scale(0.9);
+  animation: fadeIn 0.4s ease forwards;
+}
+
+/* shift every second card to the right */
+.wordCard:nth-child(even) {
+  /*margin-left: 200px;*/
+  align-self: flex-end;
+}
+
+/*add spacing btn individual caards*/
+.wordCard:not(:last-child) {
+  margin-bottom: 20px;
+}
+
+/*animate the word cards */
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* style the content of the words*/
+.cardContent {
+  width: 350px;
+  height: 200px;
+  background: rgb(207, 189, 108);
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+
+  display: grid;
+  align-items: center;
+  justify-content: center;
+}
+
+
+/*the start button*/
+.startButton {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  padding: 20px;
+  margin: 40px;
+
+  background: rgb(201, 118, 35);
+  border-radius: 24px;
+
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  max-width: 250px;
+  margin: 30px auto;
+
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  letter-spacing: 2px;
+}
+
+.startButton:hover{
+  background: rgb(144, 190, 130);
+}
+
+/*style the instructions, about, score pages*/
+
+#cardModalPage {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  padding: 30px;
+  margin: 40px;
+
+  background: rgb(247, 226, 200);
+  border-radius: 16px;
+
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  max-width: 600px;
+  margin: 40px auto;
+}
+
+/*style the timer*/
+
+.timerCount {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  padding: 18px;
+  margin: 40px;
+
+  background: rgb(144, 190, 130);
+  border-radius: 10px;
+
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  max-width: 200px;
+
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  letter-spacing: 2px;
+  margin: 40px auto;
+}
+
+/*style the input field in form for user submit answers of the game */
+.wordFormInput {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid rgb(181, 212, 214);
+  border-radius: 4px;
+  box-shadow: 0 8px 25px rgba(25, 207, 164, 0.15);
+  font-weight: bold;
+}
+
+/*signup and login input fields*/
+.answerForm {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid rgb(181, 212, 214);
+  border-radius: 4px;
+  box-shadow: 0 8px 25px rgba(25, 207, 164, 0.15);
+  font-weight: bold;
+
+}
+
+
+/*style submit form button*/
+#submitButton {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  padding: 12px;
+  margin: 40px;
+
+  background: rgb(207, 189, 108);
+  color: whitesmoke;
+  border-radius: 10px;
+
+  box-shadow: 0 8px 25px rgba(25, 207, 164, 0.15);
+  max-width: 250px;
+
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+
+#submitButton:hover {
+  background-color: rgb(62, 188, 81);
+}
+
+/*style the continue button*/
+.continueButton {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  padding: 12px;
+  margin: 40px;
+
+  background: rgb(207, 189, 108);
+  border-radius: 10px;
+
+  box-shadow: 0 8px 25px rgba(138, 22, 22, 0.15);
+  max-width: 250px;
+  margin: 40px auto;
+
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  letter-spacing: 2px;
+  cursor: pointer;
+
+}
+
+.continueButton:hover {
+  background-color: rgb(120, 231, 155);
+}
+
+/*style the end game button*/
+.endGamebutton {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  padding: 12px;
+  margin: 40px;
+
+  background: rgb(207, 189, 108);
+  border-radius: 10px;
+
+  box-shadow: 0 8px 25px rgba(138, 22, 22, 0.15);
+  max-width: 250px;
+  margin: 40px auto;
+
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+
+.endGamebutton:hover {
+  background-color: #c0392b;
+}
+
+/*style the admin forms(register and log in)*/
+#lower_login {
+  text-align: center;
+}
+
+#lower_login a {
+  text-decoration: none;
+  color: rgb(108, 189, 207);
+}
+
+#lower_login button {
+  background: rgb(220, 141, 62);
+  border: 2px solid #ddd;
+  display: inline-block;
+  font-size: 18px;
+  margin: 8px 12px;
+  padding: 14px;
+  border-radius: 12px;
+  width: 120px;
+  cursor: pointer;
+}
+
+#lower_login button:hover{
+  background-color: rgb(226, 123, 20);
+}
+
+/*style Admin Panel, add word button*/
+.newWordBtn {
+  background: rgba(95, 166, 228, 0.986);
+  border: 2px solid #ddd;
+  display: inline-block;
+  font-size: 14px;
+  margin: 8px 6px;
+  padding: 12px;
+  border-radius: 10px;
+  width: 150px;
+  cursor: pointer;
+}
+.newWordBtn:hover{
+  background-color: #0989ce;
+}
+
+/*toggle button for add new word*/
+.toggleWordBtn {
+  background: #849aa0;
+  border: 2px solid #ddd;
+  display: inline-block;
+  font-size: 18px;
+  margin: 8px 6px;
+  padding: 14px;
+  border-radius: 4px;
+  width: 50%;
+  cursor: pointer;
+
+}
+
+.toggleWordBtn:hover {
+  background: rgba(114, 179, 236, 0.986);
+
+}
+
+/*style input field */
+
+.newWordInputField {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid rgb(181, 212, 214);
+  border-radius: 4px;
+}
+
+/*add some animation on results*/
+#resultsScreen {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.4s ease;
+}
+
+#resultsScreen.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* style Admin Panel section and cards*/
+
+.adminSection {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  margin-top: 40px;
+  flex-wrap: wrap;
+
+}
+
+.adminSectionCards {
+  background: rgb(217, 194, 93);
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 40px 32px;
+  width: 220px;
+  text-align: center;
+  text-decoration: none;
+  color: #0a0a0a;
+  cursor: pointer;
+  transition: box-shadow 0.2s, border-color 0.2s;
+
+}
+
+.adminSectionCards:hover {
+  border-color: #999;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+
+}
+
+.adminSectionCards .cardIcon {
+  font-size: 36px;
+  margin-bottom: 14px;
+
+}
+
+.adminSectionCards .cardTitle {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 6px;
+
+}
+
+.adminSectionCards .cardSub {
+  font-size: 13px;
+  color: #161313;
+
+}
+
+/*back naviagtion buttons*/
+
+.backButtons {
+  text-decoration: none;
+  color: #111;
+  background: rgb(248, 176, 105);
+  border: 2px solid #ddd;
+  font-size: 14px;
+  margin: 8px 6px;
+  padding: 12px;
+  border-radius: 12px;
+  width: 25%;
+  cursor: pointer;
+}
+
+.backButtons:hover {
+  /*background: rgb(248, 176, 105);*/
+  background: rgb(207, 189, 108);
+
+}
+
+/*style the footer*/
+.footer {
+  height: 70px;
+  color: rgb(11, 11, 11);
+  width: 100%;
+  background: rgb(179, 96, 13);
+  position: fixed;
+  bottom: 0;
+  text-align: center;
+  margin: 0;
+  font-size: larger;
+}
+
+/* style the hidden section for add word, its hidden by default*/
+#addWordSection {
+  display: none;
+  margin-bottom: 12px;
+}
+
+#addWordSection.open {
+  display: block;
+}
+
+
+/*sytle the word manger table */
+/* search bar*/
+.searchRow {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.searchRow input {
+  flex: 1;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.searchRow button {
+  padding: 8px 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background: #f29c07;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.searchRow button:hover {
+  background: #f1dcbe;
+}
+
+/* ── Word table ── */
+.wordTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.wordTable th {
+  background: #f7f7f7;
+  padding: 8px 10px;
+  text-align: left;
+  font-size: 14px;
+  color: #555;
+  border-bottom: 1px solid #ddd;
+  font-weight: 500;
+}
+
+.wordTable td {
+  padding: 6px 8px;
+  border-bottom: 1px solid #ebebeb;
+  vertical-align: middle;
+}
+
+.wordTable tr:last-child td {
+  border-bottom: none;
+}
+
+.wordTable tr:hover td {
+  background: #efd39f;
+}
+
+.wordTable tr.editing td {
+  background: #f7fbf2;
+}
+
+/* style the Inline edit input inside table */
+.edit-input {
+  padding: 5px 10px;
+  border: 1px solid #aaa;
+  border-radius: 6px;
+  font-size: 13px;
+  width: 180px;
+}
+
+/* style Action buttons row inside table*/
+.actions {
+  display: flex;
+  gap: 6px;
+  font-weight: bold;
+}
+/*style edit button*/
+.actions button {
+  background-color:rgb(207, 189, 108);
+  font-size: 13px;
+  padding: 10px;
+  border-radius: 8px;
+
+}
+
+/*delete word from table*/
+.deleteTableWord{
+  background-color: #f67c6f;
+  font-size: 13px;
+  padding: 10px;
+  border-radius: 8px;
+}
+.deleteTableWord:hover{
+  background-color: #f22c17;
+
+}
+/*Empty / no results row*/
+.empty-row td {
+  text-align: center;
+  color: #aaa;
+  padding: 24px;
+}
+
+/*style word action manager on Word Manager Card*/
+
+.wordActionsManager {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border-top: 1px solid #eee;
+  padding-top: 14px;
+}
+
+.wordActionLink {
+  display: block;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 8px 12px;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  color: #111;
+  background:  rgb(220, 141, 62);
+  text-align: center;
+  transition: background 0.15s;
+}
+
+.wordActionLink:hover {
+  background: #eae4e4;
+  border-color: #bbb;
+}
+
+/*style the search  bar on edit and delete word pages*/
+.searchRow {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.searchRow input {
+  flex: 1;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.searchRow button {
+  padding: 8px 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background: #f29c07;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.searchRow button:hover {
+  background: #f8cc7b;
+}
+
+/*style the empty row*/
+.emptyRow td {
+  text-align: center;
+  color: #aaa;
+  padding: 24px;
+}
+
+
+@media screen and (max-width: 700px) {
+  .sideBar {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+
+  .sideBar a {
+    float: left;
+  }
+
+  div.content {
+    margin-left: 0;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .sideBar a {
+    text-align: center;
+    float: none;
+  }
+}

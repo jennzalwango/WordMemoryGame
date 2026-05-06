@@ -7,7 +7,7 @@
     <title>Memory Word Game</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="./home.css">
+    <link rel="stylesheet" href="./app.css">
 </head>
 
 <body>
@@ -16,7 +16,7 @@
             Memory Word Game
         </li>
         <li>
-            User
+            <button onclick="logout()" class="logoutBtn">Logout</button>
         </li>
     </nav>
     <!--the side bar for game categories-->
@@ -25,105 +25,47 @@
         <a href="Instructions.html">Instructions</a>
         <a href="score.html">Score</a>
         <a href="about.html">About</a>
-        <a href="register.html">Admin Panel</a>
+        <a href="admin.html">Admin Panel</a>
 
     </div>
     <!--the content-->
     <section>
         <div class="cardContainer">
-            <h3 style="text-align: center;">Admin Panel</h3>
-            <input class="newWordInputField" type="text" id="newWord" placeholder="Add New Word">
-            <button onclick="addNewWord();" class="newWordBtn">Add new Word</button>
-            <!--get word list-->
-            <div id="wordList"></div>
-            <!--the message-->
-            <p id="message"></p>
-        </div>
+            <h3 style="text-align: center; margin-bottom: 8px;">Admin Dashboard</h3>
+            <p style="text-align:center; color:#888; font-size:14px;">Choose a section to manage</p>
 
+            <!--the dasboard for the admin to manage, create navigation cards-->
+            <div class="adminSection">
+                <!-- Card 1: Word Manager -->
+                <div class="adminSectionCards" href="wordManager.html">
+                    <div class="cardIcon">📝</div>
+                    <div class="cardTitle">Word Manager</div>
+                    <div class="cardSub">Manage words of the game</div>
+
+                    <!--links to Add, Edit, Delete words-->
+                    <div class="wordActionsManager">
+                        <a class="wordActionLink" href="addWords.html">+ Add Word</a>
+                        <a class="wordActionLink" href="editWords.html">✏️ Edit Word</a>
+                        <a class="wordActionLink" href="deleteWords.html">🗑️ Delete Word</a>
+                    </div>
+                </div>
+
+                <!-- Card 2: GAme Analytics -->
+                <a class="adminSectionCards" href="adminAnalytics.html">
+                    <div class="cardIcon">📊</div>
+                    <div class="cardTitle">Game Analytics</div>
+                    <div class="cardSub">View Game Insights and performance</div>
+                </a>
+            </div>
+
+        </div>
     </section>
 
     <footer class="footer">
         <p> &copy; Copy Right 2026</p>
     </footer>
-
-    <script>
-        function addNewWord() {
-            const word = document.getElementById("newWord").value;
-
-            fetch("./api/admin/addWords.php", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    word: word
-                })
-            })
-            .then(res => res.json())
-            .then(data => {
-                alert(data.message);
-                loadAllWords();
-
-            });
-        }
-        // this will load all words to show them to the frontend from backend
-        function loadAllWords() {
-            fetch("./api/admin/getAllWords.php", {
-                method: "GET"
-            })
-            .then(res => res.json())
-            .then(words => {
-                const container = document.getElementById("wordList");
-                container.innerHTML = "";
-
-                words.forEach(w => {
-                    let div = document.createElement("div");
-                    div.innerHTML = `
-                    <input type="text" value="${w.word_name}" id="word-${w.id}">
-                    <button class="editWordBtn" onclick="updateWord(${w.id})">Edit</button>
-                    <button  class="deleteWordBtn" onclick="deleteWord(${w.id})">Delete</button>
-        `;
-                    container.appendChild(div);
-                });
-            });
-        }
-
-        //function to delete words from the game
-       function deleteWord(id) {
-            fetch('./api/admin/deleteGameWords.php', {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ id: id })
-            })
-            .then(res => res.json())
-            .then(data => {
-                document.getElementById("message").innerText = data.message;
-                loadAllWords(); // ← this refreshes the word list
-            });
-        }
-
-
-        document.addEventListener("DOMContentLoaded", loadAllWords);
-
-        //function update words of the game
-        function updateWord(id) {
-            const newWord = document.getElementById(`word-${id}`).value;
-
-            //use fetch to call the php file
-            fetch("./api/admin/editGameWords.php", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    id: id,
-                    word: newWord
-                })
-            })
-            .then(res => res.json()) // the response in json
-            .then(data => {
-                document.getElementById("message").innerText = data.message;
-                loadAllWords();
-            });
-        }
-
-    </script>
 </body>
+
+<script src="./JS/admin/adminLogOut.js" defer></script>
 
 </html>

@@ -16,7 +16,7 @@
             Memory Word Game
         </li>
         <li>
-            User
+            <button onclick="logout()" class="logoutBtn">Logout</button>
         </li>
     </nav>
     <!--the side bar for game categories-->
@@ -25,27 +25,32 @@
         <a href="Instructions.html">Instructions</a>
         <a href="score.html">Score</a>
         <a href="about.html">About</a>
-        <a href="register.html">Admin Panel</a>
+        <a href="admin.html">Admin Panel</a>
+
     </div>
     <!--the content-->
     <section>
-        
-        <div>
-            <div class="timerCount">Timer: 00:05</div>
-        </div>
-        
-        <div class="cardContainer cardContentcontainer">
-            <div id="gameWordsContainer"> <!--cards with words-->        
-            </div>
+        <div class="cardContainer">
+            <h3>Game Analytics</h3>
 
+            <p>Total Games: <span id="totalGames"></span></p>
+            <p>Highest Score: <span id="highestScore"></span></p>
+            <p>Average Score: <span id="avgScore"></span></p>
+
+            <h4>Top Scores</h4>
+            <ul id="topScoresList"></ul>
+            <a class="backButtons" href="admin.html" >Back to Admin Panel</a>
         </div>
+
     </section>
 
     <footer class="footer">
         <p> &copy; Copy Right 2026</p>
     </footer>
+    
+    <script src="./JS/admin/gameAnalytics.js" defer></script>
+    <script src="./JS/admin/adminLogOut.js" defer></script>
 
-    <script src="./JS/game.js"></script>
 </body>
 
 </html>

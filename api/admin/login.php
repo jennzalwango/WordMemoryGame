@@ -12,6 +12,7 @@ $password = $data['password'] ?? '';
 //find the user, with slect , prepare statement
 $userLoginStmt = $conn->prepare("SELECT id, password FROM Users WHERE username =?");
 
+//bind params
 $userLoginStmt->bind_param('s' , $username);
 $userLoginStmt->execute();
 

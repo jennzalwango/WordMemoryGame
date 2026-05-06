@@ -7,7 +7,7 @@ $StateGameSql = "INSERT INTO GameSession (score, completed) VALUES (0, 0)";
 if ($conn->query($StateGameSql) === TRUE) {
     $game_id = $conn->insert_id; // get new created ID in a row
 
-    //return it to JS
+    //return id to JS
     echo json_encode([
         "game_id" => $game_id
     ]);

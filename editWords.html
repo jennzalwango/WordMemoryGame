@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Memory Word Game</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./app.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <li>
+            Memory Word Game
+        </li>
+        <li>
+            <button onclick="logout()" class="logoutBtn">Logout</button>
+        </li>
+    </nav>
+    <!--the side bar for game categories-->
+    <div class="sideBar">
+        <a href="home.html">Home</a>
+        <a href="Instructions.html">Instructions</a>
+        <a href="score.html">Score</a>
+        <a href="about.html">About</a>
+        <a href="admin.html">Admin Panel</a>
+
+    </div>
+    <!--the content-->
+    <section>
+        <div class="cardContainer">
+
+            <h3 style="text-align: center;">Edit and View Words</h3>
+
+            <!-- the message -->
+            <p id="message"></p>
+
+            <!-- Search bar -->
+            <div class="searchRow">
+                <input type="text" id="searchInput" placeholder="Search for a word...">
+                <button onclick="searchWord()">Search</button>
+                <button onclick="clearSearch()">Clear</button>
+            </div>
+
+            <!-- Word table -->
+            <table class="wordTable">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Word</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="wordTableBody">
+                    <tr class="emptyRow">
+                        <td colspan="3">Loading words...</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- back link to admin -->
+            <a class="backButtons" href="admin.html">Back to Admin Panel</a>
+
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p> &copy; Copy Right 2026</p>
+    </footer>
+    <script src="./JS/admin/editWords.js" defer></script>
+    <script src="./JS/admin/adminLogOut.js" defer></script>
+
+</body>
+
+</html>

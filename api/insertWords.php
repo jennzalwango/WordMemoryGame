@@ -1,22 +1,38 @@
 <?php
 require "database_connect.php";
 
+//create sample data in word table
 $insertWords_sql = "INSERT INTO Words(word_name)VALUES
 ('Astronomy'),
-('asterism'),
-('apogee'),
-('binary star'),
-('chromosome'),
-('cellulose'),
-('eclipse'),
-('comet'),
-('cytoplasm'),
-('chloroplast'),
+('Asterism'),
+('Apogee'),
+('Binary star'),
+('Comet'),
+('Dark matter'),
+('Deneb'),
+('Eclipse'),
+('Mars'),
+('Health'),
+('Medicine'),
+('Indigestion'),
+('Infection'),
+('Influenza'),
+('Aspirin'),
+('Bandage'),
+('Chromosome'),
+('Cellulose'),
+('Chloroplast'),
+('Cytoplasm'),
+('Diffusion'),
+('Eukaryote'),
+('Lysosome'),
 ('Molecule'),
-('Intriguing'),
-('Profound'),
 ('Atom'),
-('eukaryote')";
+('Profound'),
+('Stimulating'),
+('Enlightening'),
+('Resonate'),
+('Intriguing')";
 
 //check if words are inserted
 if($conn->query($insertWords_sql) === TRUE){
